@@ -430,7 +430,6 @@ var flatten = function(array) {
 // 31. Given a string, return an object containing tallies of each letter.
 // letterTally('potato'); // {p:1, o:2, t:2, a:1}
 var letterTally = function(str, obj) {
-
 };
 
 // 32. Eliminate consecutive duplicates in a list. If the list contains repeated
@@ -462,6 +461,12 @@ var minimizeZeroes = function(array) {
 // alternateSign([2,7,8,3,1,4]) // [2,-7,8,-3,1,-4]
 // alternateSign([-2,-7,8,3,-1,4]) // [2,-7,8,-3,1,-4]
 var alternateSign = function(array) {
+  if (array.length === 0) {
+    return [];
+  } else if (array.length === 1) {
+    return [array.length] ? array.length > 0 : [-array.length];
+  }
+  return ((array[0] > 0 && array[1] < 0) ? [array[0], array[1]] : (array[0] > 0 && array[1] > 0) ? [array[0], -array[1]] : (array[0] < 0 && array[1] > 0) ? [-array[0], -array[1]] : [-array[0], array[1]]).concat(alternateSign(array.slice(2, array.length)));
 };
 
 // 36. Given a string, return a string with digits converted to their word equivalent.
