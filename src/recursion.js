@@ -325,6 +325,17 @@ var countKeysInObj = function(obj, key) {
 // countValuesInObj(obj, 'r') // 2
 // countValuesInObj(obj, 'e') // 1
 var countValuesInObj = function(obj, value) {
+  var res = 0;
+  for (var k in obj) {
+    if (obj[k] === value) {
+      res += 1;
+    }
+    if (typeof(obj[k]) === 'object') {
+      var subres = countValuesInObj(obj[k], value);
+      res += subres;
+    }
+  }
+  return res;
 };
 
 // 24. Find all keys in an object (and nested objects) by a provided name and rename
@@ -338,7 +349,6 @@ var replaceKeysInObj = function(obj, oldKey, newKey) {
 // fibonacci(5); // [0,1,1,2,3,5]
 // Note: The 0 is not counted.
 var fibonacci = function(n) {
-
 };
 
 // 26. Return the Fibonacci number located at index n of the Fibonacci sequence.
