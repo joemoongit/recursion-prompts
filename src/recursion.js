@@ -285,6 +285,39 @@ var rMap = function(array, callback) {
 // countKeysInObj(obj, 'r') // 1
 // countKeysInObj(obj, 'e') // 2
 var countKeysInObj = function(obj, key) {
+  // var res = {};
+  // for (var k in obj) {
+  //   if (k === key) {
+  //     if (k in res) {
+  //       res[k] += 1;
+  //     } else {
+  //       res[k] = 1;
+  //     }
+  //   }
+  //   if (typeof(obj[k]) === 'object') {
+  //     var subres = countKeysInObj(obj[k], key);
+  //     for (var j in subres) {
+  //       if (j in res) {
+  //         res[j] += subres[j];
+  //       } else {
+  //         res[j] = subres[j];
+  //       }
+  //     }
+  //   }
+  // }
+  // return res;
+
+  var res = 0;
+  for (var k in obj) {
+    if (k === key) {
+      res += 1;
+    }
+    if (typeof(obj[k]) === 'object') {
+      var subres = countKeysInObj(obj[k], key);
+      res += subres;
+    }
+  }
+  return res;
 };
 
 // 23. Write a function that counts the number of times a value occurs in an object.
@@ -305,6 +338,7 @@ var replaceKeysInObj = function(obj, oldKey, newKey) {
 // fibonacci(5); // [0,1,1,2,3,5]
 // Note: The 0 is not counted.
 var fibonacci = function(n) {
+
 };
 
 // 26. Return the Fibonacci number located at index n of the Fibonacci sequence.
