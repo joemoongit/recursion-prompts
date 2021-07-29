@@ -487,8 +487,23 @@ var tagCount = function(tag, node) {
 // binarySearch(array, 5) // 5
 // https://www.khanacademy.org/computing/computer-science/algorithms/binary-search/a/binary-search
 var binarySearch = function(array, target, min, max) {
-};
 
+  min = (min === undefined) ? 0 : min;
+  max = (max === undefined) ? array.length : max;
+
+  var avg = Math.floor((min+max)/2);
+
+  if (min >= max && (array[avg] !== target)) {
+    return null;
+  }
+  if (array[avg] === target) {
+    return array.indexOf(target);
+  } else if (array[avg] < target) {
+    return binarySearch(array, target, avg + 1, max);
+  } else if (array[avg] > target) {
+    return binarySearch(array, target, min, avg - 1)
+  }
+};
 // 39. Write a merge sort function.
 // mergeSort([34,7,23,32,5,62]) // [5,7,23,32,34,62]
 // https://www.khanacademy.org/computing/computer-science/algorithms/merge-sort/a/divide-and-conquer-algorithms
