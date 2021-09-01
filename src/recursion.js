@@ -352,16 +352,16 @@ var fibonacci = function(n) {
 // nthFibo(5); // 5
 // nthFibo(7); // 13
 // nthFibo(3); // 2
-var nthFibo = function(n) {
-  if (n < 0) {
-    return null;
-  }
+var nthFibo = function(n, memo = {}) {
+  if (n in memo) { return memo[n]; }
+  if (n < 0) { return null; }
   if (n === 0) {
     return 0;
   } else if (n === 1) {
     return 1;
   }
-  return nthFibo(n - 1) + nthFibo(n - 2);
+  memo[n] = nthFibo(n - 1, memo) + nthFibo(n - 2, memo);
+  return memo[n];
 };
 
 // 27. Given an array of words, return a new array containing each word capitalized.
@@ -519,17 +519,17 @@ var binarySearch = function(array, target, min, max) {
   min = (min === undefined) ? 0 : min;
   max = (max === undefined) ? array.length : max;
 
-  var avg = Math.floor((min+max)/2);
+  var midpoint = Math.floor((min+max)/2);
 
-  if (min >= max && (array[avg] !== target)) {
+  if (min >= max && (array[midpoint] !== target)) {
     return null;
   }
-  if (array[avg] === target) {
-    return array.indexOf(target);
-  } else if (array[avg] < target) {
-    return binarySearch(array, target, avg + 1, max);
-  } else if (array[avg] > target) {
-    return binarySearch(array, target, min, avg - 1)
+  if (array[midpoint] === target) {
+    return midpoint;
+  } else if (array[midpoint] < target) {
+    return binarySearch(array, target, midpoint + 1, max);
+  } else if (array[midpoint] > target) {
+    return binarySearch(array, target, min, midpoint - 1)
   }
 };
 // 39. Write a merge sort function.
